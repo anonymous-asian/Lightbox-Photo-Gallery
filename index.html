@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gallery</title>
+	<!-- index.css is compiled from index.scss -->
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<!-- LightBox JS -->
+	<link rel="stylesheet" type="text/css" href="css/lightbox.min.css">
+	<!-- LiveReload script -->
+	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+</head>
+<body>
+	<div id="container" class="container">
+		<script type="text/javascript">
+			// DOM manipulation hierarchy
+			// Outer div contains all page elements via flexbox
+			// Link a contains src of image and plugin to lightbox
+			// Img img contains image
+			var divs = document.createDocumentFragment();
+			for(var i = 1; i < 30; i++) {
+				// Div contains image and hyperlink
+				var outer = document.createElement('DIV');
+				// Hyperlink manditory for lightbox.js plugin
+				var link = document.createElement('A');
+				// Image contains holder image pulled from image folder
+				var img = document.createElement('IMG');
+				
+				// Not manditory
+				outer.id = 'div' + i;
+				// Class defines a flex item
+				outer.className = 'item';
+				// Set image src
+				img.setAttribute('src', 'Images/678636.jpg');
+				//Not manditory
+				link.id = 'a' + i;
+				// Src of image
+				link.setAttribute('href', 'Images/678636.jpg');
+				// All images with the same attribute name are treated
+				// as a bundle in lightbox.js
+				link.setAttribute('data-lightbox', 'img');
+				// Append IMG to A
+				link.appendChild(img);
+				// Append A to DIV
+				outer.appendChild(link);
+				// Append inner DIV to outer page DIV
+				divs.appendChild(outer);
+			}
+			//Query selector -> add nested div elements to "container" div
+			document.getElementById("container").appendChild(divs);
+		</script>
+	</div>
+	<script>
+		// Search for images in specific directory to populate gallery
+		// Imcomplete
+		var dir = "Images/";
+		var fileextension = ".jpg";
+		$.ajax({
+		    // This will retrieve the contents of the folder if the folder is configured as 'browsable'
+		    url: dir,
+		    success: function (data) {
+		        // List all png file names in the page
+		        $(data).find("a:contains(" + fileextension + ")").each(function () {
+		            var filename = this.href.replace(window.location.host, "").replace("http:///", "");
+		            $("body").append($("<img src=" + dir + filename + "></img>"));
+		        });
+		    }
+		});
+	</script>
+	<!-- LightBox.js + jQuery -->
+	<script src="js/lightbox-plus-jquery.js"></script>
+</body>
+</html>
