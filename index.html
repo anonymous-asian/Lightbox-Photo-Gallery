@@ -24,12 +24,13 @@
 		        $(data).find("a").attr("href", function (i, val) {
 		            if( val.match(/\.(jpe?g|png|gif)$/) ) { 
 		            	images.push(folder + val);
-		                $("body").append( "<img src='"+ folder + val +"'>" );
 		            } 
 		        });
 		    }
 		});
 
+		// Find Azure path name of current directory
+		alert(window.location.pathname);
 		alert(images);
 	</script>
 
