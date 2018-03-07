@@ -13,13 +13,10 @@
 
 
 	<!-- AJAX call to load images from directory-->
-	<!--<script>
+	<script>
 		var images = new Array("Some", "test", "image", "urls");
-<<<<<<< HEAD
 		var folder = "/Images/";
-=======
-		var folder = "D:/home/site/wwwroot/Images/";
->>>>>>> parent of a8ebbd5... Image directory path
+		//var folder = "D:/home/site/wwwroot/Images/";
 
 		$.ajax({
 		    url : folder,
@@ -32,22 +29,7 @@
 		    }
 		});
 		alert(images);
-	</script>-->
-
-	<?php
-	
-		$path = "Images/";
-		    $di = new RecursiveDirectoryIterator($path);
-		    $iterator = new RecursiveIteratorIterator($di, RecursiveIteratorIterator::CHILD_FIRST);
-
-		    $files = [];
-		    foreach ($iterator as $file) {
-		        $files[] = $file;
-		    }
-
-		    asort($files);
-		    echo $files;
-	?>
+	</script>
 
 	<div id="container" class="container">
 		<script type="text/javascript">
