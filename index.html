@@ -10,6 +10,29 @@
 	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 </head>
 <body>
+	<!-- LightBox.js + jQuery -->
+	<script src="lightbox-plus-jquery.js"></script>
+
+	<!-- AJAX call to load images from directory-->
+	<script>
+		var images = new Array("Some", "test", "image", "urls");
+		var folder = "..Images";
+
+		$.ajax({
+		    url : folder,
+		    success: function (data) {
+		        $(data).find("a").attr("href", function (i, val) {
+		            if( val.match(/\.(jpe?g|png|gif)$/) ) { 
+		            	images.push(folder + val);
+		                $("body").append( "<img src='"+ folder + val +"'>" );
+		            } 
+		        });
+		    }
+		});
+
+		alert(images);
+	</script>
+
 	<div id="container" class="container">
 		<script type="text/javascript">
 			// DOM manipulation hierarchy
@@ -49,24 +72,5 @@
 			document.getElementById("container").appendChild(divs);
 		</script>
 	</div>
-	<script>
-		// Search for images in specific directory to populate gallery
-		// Imcomplete
-		var dir = "Images/";
-		var fileextension = ".jpg";
-		$.ajax({
-		    // This will retrieve the contents of the folder if the folder is configured as 'browsable'
-		    url: dir,
-		    success: function (data) {
-		        // List all png file names in the page
-		        $(data).find("a:contains(" + fileextension + ")").each(function () {
-		            var filename = this.href.replace(window.location.host, "").replace("http:///", "");
-		            $("body").append($("<img src=" + dir + filename + "></img>"));
-		        });
-		    }
-		});
-	</script>
-	<!-- LightBox.js + jQuery -->
-	<script src="js/lightbox-plus-jquery.js"></script>
 </body>
 </html>
