@@ -11,8 +11,9 @@
 	<!-- LightBox.js + jQuery -->
 	<script src="js/lightbox-plus-jquery.js"></script>
 
+
 	<!-- AJAX call to load images from directory-->
-	<script>
+	<!--<script>
 		var images = new Array("Some", "test", "image", "urls");
 		var folder = "/Images/";
 
@@ -27,7 +28,22 @@
 		    }
 		});
 		alert(images);
-	</script>
+	</script>-->
+
+	<?php
+	
+		$path = "Images/";
+		    $di = new RecursiveDirectoryIterator($path);
+		    $iterator = new RecursiveIteratorIterator($di, RecursiveIteratorIterator::CHILD_FIRST);
+
+		    $files = [];
+		    foreach ($iterator as $file) {
+		        $files[] = $file;
+		    }
+
+		    asort($files);
+		    echo $files;
+	?>
 
 	<div id="container" class="container">
 		<script type="text/javascript">
